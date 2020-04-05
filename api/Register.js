@@ -50,7 +50,7 @@ module.exports = function(req, res){
             });
         }
         
-        var queryString = "insert into web_user values (?, ?, '', 1)";
+        var queryString = "insert into web_user values (?, ?, 'default.png', 1)";
         var params = [username, password];
         try{
             await mysql(queryString, params);
@@ -70,6 +70,7 @@ module.exports = function(req, res){
             req.session.isCounted = true;
             req.session.username = username;
             req.session.selfCounter = 1;
+            req.session.imgpath = 'default.png'
 
             res.send({
                 isRegistered  : true,

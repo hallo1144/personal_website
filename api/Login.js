@@ -27,18 +27,21 @@ module.exports = function(req, res){
             });
     }
 	
-    var queryString = "select visit_time from web_user where username = ? and password = ?";
+    var queryString = "select * from web_user where username = ? and password = ?";
     var params = [username, password];
     
     mysql(queryString, params).then(async obj => {
         if(obj.length === 1){
             try{
+                console.log(obj)
+
                 var regen = util.promisify(req.session.regenerate).bind(req.session);
                 await regen();
                 Counter.increaseGlobalCount();
                 req.session.isCounted = true;
                 req.session.username = username;
                 req.session.selfCounter = obj[0].visit_time + 1;
+                req.session.imgname = obj[0].picture_name
                 params = [req.session.selfCounter, username, password]
                 mysql("update web_user set visit_time = ? where username = ? and password = ?", params).catch(error => {
                     console.log(error)

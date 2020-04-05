@@ -116,6 +116,9 @@ class Home extends Component{
                         else if(res.data.status === "not_an_image"){
                             alert("please upload IMAGE!!");
                         }
+                        else if(res.data.status === "not_an_image"){
+                            alert("sorry, some errors occur when uploading your image. please try it later.");
+                        }
                     }
                     else{
                         alert("sorry, some errors occur when posting data");
@@ -180,7 +183,7 @@ class Home extends Component{
                         withPreview={true}
                         singleImage={true}
                         maxFileSize={12582912}
-                        label={'Max file size: 5MB, ' + (this.state.fileSelected ? 'select ' + this.state.filename : 'no image selected')}
+                        label={'Max file size: 12MB, ' + (this.state.fileSelected ? 'select ' + this.state.filename : 'no image selected')}
                         onChange={this.handleImageChange}
                     />
                 </div>

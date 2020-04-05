@@ -57,8 +57,8 @@ module.exports = async function(req, res){
     var extension = tmp[tmp.length - 1]
     var filename = shortid.generate() + '.' + extension;
     // console.log(filename)
-    
-    file.mv('upload/images/' + filename, async err => {
+
+    file.mv('frontend/src/upload/images/' + filename, async err => {
         if(err){
             console.log(err)
             return res.send({
@@ -69,7 +69,7 @@ module.exports = async function(req, res){
         
         try{
             await mysql('update web_user set picture_name = ? where username = ?', [filename, req.session.username]);
-
+            req.session.imgname = filename;
             res.send({
                 success: true,
                 status: ''

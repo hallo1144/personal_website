@@ -20,7 +20,9 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
-backend/node_modules
-backend/node_modules/*
-backend/api/tools/*.json
-backend/upload/images/*
+#upload files
+frontend/src/upload/images/*
+
+node_modules
+node_modules/*
+api/tools/*.json
