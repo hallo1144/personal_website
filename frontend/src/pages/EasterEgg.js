@@ -8,6 +8,12 @@ import './EasterEgg.css';
 // import Footer from "../component/Footer";
 
 class Home extends Component{
+    constructor(){
+        super();
+
+        fetch('/api');
+    }
+
     render(){
         return (
         <div>

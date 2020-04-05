@@ -4,9 +4,24 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var APIRouter = require('./routes/api');
+// var Counter = require('./api/tools/Counter');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+var db_options = require('./api/tools/DbOptions.json');
+var session_options = require('./api/tools/SessionOptions.json');
+var fileupload = require("express-fileupload");
+
+var APIRouter = require('./api/Route');
 
 var app = express();
+
+// needed for image upload
+app.use(fileupload());
+
+// setup session
+var sessionStore = new MySQLStore(db_options);
+session_options.store = sessionStore;
+app.use(session(session_options));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,5 +50,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// process.on('SIGINT', () => {
+//   Counter.save();
+//   process.exit();
+// });
 
 module.exports = app;

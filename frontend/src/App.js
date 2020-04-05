@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 // import { Home_page,Login_page, Support_page,About_page,Contact_page,Forget_page } from './pages';
-import { Home_page, Easter_egg, Login_page, Register_page } from './Route';
+import { Home_page, Easter_egg, Login_page, Register_page, Profile_page } from './Route';
 // import { NavBar } from './component/AppBar'
 
 class App extends Component {
@@ -14,9 +14,9 @@ class App extends Component {
           <Route path="/" exact component={Home_page} />
           <Route path="/surprise" exact component={Easter_egg} />
           <Route path="/login" component={Login_page} />
-          <Route path="/Register" component={Register_page} />
-          {/*<Route path="/Support" component={Support_page} />
-          <Route path="/About" component={About_page} />
+          <Route path="/register" component={Register_page} />
+          <Route path="/profile" component={Profile_page} />
+          {/*<Route path="/About" component={About_page} />
           <Route path="/Contact" component={Contact_page} />
           <Route path="/Forget" component={Forget_page} />
           <Route path="/Home_in" component={Home_in_page} />

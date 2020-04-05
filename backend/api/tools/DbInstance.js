@@ -1,15 +1,16 @@
-var mysql = require('mysql')
+var mysql = require('mysql');
+var options = require('./DbOptions.json');
+var util = require('util');
 
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'b06901183',
-    password : 'Chris0303',
-    database : 'aa3na6j3sfvhuh'
-});
+var connection = mysql.createConnection(options);
 
 connection.connect();
 
-query = "CREATE TABLE web_user (account char(50), password char(50), picture_name char(50));";
+var query = "CREATE TABLE IF NOT EXISTS web_user (username char(50), password char(50), picture_name char(50), visit_time INT);";
 connection.query(query, );
+// query = "CREATE TABLE IF NOT EXISTS global_count (name char(50), value INT);";
+// connection.query(query, );
 
-module.exports = connection;
+var query_async = util.promisify(connection.query).bind(connection);
+
+module.exports = query_async;

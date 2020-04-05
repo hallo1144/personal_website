@@ -3,11 +3,13 @@ import image from '../img/pikachu.png';
 import { NavBar } from '../component/AppBar';
 import './Home.css';
 
-// import { Link } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-// import Footer from "../component/Footer";
-
 class Home extends Component{
+    constructor(){
+        super();
+
+        fetch('/api');
+    }
+
     render(){
         return (
         <div>
@@ -26,7 +28,7 @@ class Home extends Component{
                 
                 <div id="Home_content">
                     <h1 id="Home_content_title">
-                        Welcome to my homepage :)
+                        Welcome to my website :)
                     </h1>
                     <p id="Home_content_context">
                         嗨嗨，我是台大電機系的學生<br />
