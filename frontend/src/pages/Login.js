@@ -39,27 +39,30 @@ class Home extends Component{
             password:this.state.password}
         ).then(res => {
             if(res.data){
-                console.log(res.data);
+                // console.log(res.data);
                 this.setState( {isLoggedin: res.data.isLoggedin} );
 
-                if(!res.data.isLoggedin){
+                if(res.data.isLoggedin){
+                    alert('welcome, ' + this.state.username + '!!');
+                }
+                else{
                     this.setState({username: '', password: ''});
-                }
-                
-                if(res.data.status === "miss_acc_or_pass"){
-                    alert("please type in username AND password :)");
-                }
-                else if(res.data.status === "acc_pass_too_long"){
-                    alert("username or password is too long!! ( > 48 chars )");
-                }
-                else if(res.data.status === "server_err"){
-                    alert("sorry, some errors occur when querying db");
-                }
-                else if(res.data.status === "username_dup"){
-                    alert("sorry, there seems to be duplicate usernames in the db. please re-register this username.");
-                }
-                else if(res.data.status === "username_no_match"){
-                    alert("username or password is incorrect!!");
+
+                    if(res.data.status === "miss_acc_or_pass"){
+                        alert("please type in username AND password :)");
+                    }
+                    else if(res.data.status === "acc_pass_too_long"){
+                        alert("username or password is too long!! ( > 48 chars )");
+                    }
+                    else if(res.data.status === "server_err"){
+                        alert("sorry, some errors occur when querying db");
+                    }
+                    else if(res.data.status === "username_dup"){
+                        alert("sorry, there seems to be duplicate usernames in the db. please re-register this username.");
+                    }
+                    else if(res.data.status === "username_no_match"){
+                        alert("username or password is incorrect!!");
+                    }
                 }
             }
             else
@@ -67,7 +70,7 @@ class Home extends Component{
                 alert("sorry, some errors occur when posting data");
             }
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
             alert("sorry, some errors occur when posting data");
         })
 	}

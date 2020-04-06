@@ -5,7 +5,6 @@ module.exports = function(req, res){
     res.send({
         global_count: Counter.getGlobalCount(),
         personal_count: req.session.selfCounter,
-        username: username,
-        imgname: req.session.imgname
+        username: username
     })
 }

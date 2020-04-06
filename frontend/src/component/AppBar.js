@@ -14,10 +14,12 @@ const NavBar = () => {
             <div id = "AppBar_Logo"><Link  to="/"><Logo/></Link></div>
             <div id = "AppBar_space"></div>
             <div id = "AppBar_menu">
-              <Link id = "AppBar_Link" to="/"><Button id = "AppBar_menuButton">let's talk!</Button></Link>
-              <Link id = "AppBar_Link" to="/profile"><Button id = "AppBar_menuButton">Profile</Button></Link>
-              <Link id = "AppBar_Link" to="/register"><Button id = "AppBar_menuButton">Register</Button></Link>
-              <Link id = "AppBar_Link" to="/login"><Button id = "AppBar_menuButton">Login</Button></Link>
+                <Link id = "AppBar_Link" to="/"><Button id = "AppBar_menuButton">let's talk!</Button></Link>
+                <Link id = "AppBar_Link" to="/profile" onClick={() => { window.location.pathname = "/profile" }}>
+                    <Button id = "AppBar_menuButton">Profile</Button>
+                </Link>
+                <Link id = "AppBar_Link" to="/register"><Button id = "AppBar_menuButton">Register</Button></Link>
+                <Link id = "AppBar_Link" to="/login"><Button id = "AppBar_menuButton">Login</Button></Link>
             </div>
         </Toolbar>
       </AppBar>

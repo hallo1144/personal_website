@@ -5,8 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "backend": "npm start",
-    "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "frontend": "export DANGEROUSLY_DISABLE_HOST_CHECK=true; npm start --prefix frontend",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "merge": "npm run build --prefix frontend; npm start"
   },
   "dependencies": {
     "concurrently": "^5.1.0",

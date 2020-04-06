@@ -58,7 +58,7 @@ module.exports = async function(req, res){
     var filename = shortid.generate() + '.' + extension;
     // console.log(filename)
 
-    file.mv('frontend/src/upload/images/' + filename, async err => {
+    file.mv('api/upload/' + filename, async err => {
         if(err){
             console.log(err)
             return res.send({

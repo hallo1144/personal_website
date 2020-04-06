@@ -1,0 +1,29 @@
+install eb cli: 
+    pip install awsebcli --upgrade --user
+
+install aws cli:
+    pip install awscli --upgrade --user
+
+ssh to eb instance:
+    1. in ec2 console at (Network & Security)/(Key Pairs), upload your ssh with name "yourname"
+    2. in ~/.ssh, copy your id_rsa to "yourname"
+    3. eb ssh setup
+    4. eb ssh
+
+aws rds global access:
+    1. at RDS console, select a database
+    2. (Security Group Rules), open all groups in new tabs
+    3. (Inbound Rules)/(Edit Inbound Rules), set a new rule of your IP or use "Any"
+
+eb usage:
+    1. setup credentials (find your aws_access_key_id, aws_secret_access_key, [aws_session_token]) at ~/.aws/
+    2. eb init
+    3. if .git exists, eb only tracks the files tracked in git. to get rid of that, create file .ebextensions
+    4. eb deploy
+
+nginx header linmit:
+    default < 1MB, so images are blocked
+    create .ebextensions/nginx.config, set "client_max_body_size 15M;"
+
+TBD:
+    correctly set hostnames instead of "export DANGEROUSLY_DISABLE_HOST_CHECK=true;" for "invalid host header" problem

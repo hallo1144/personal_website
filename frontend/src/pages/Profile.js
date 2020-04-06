@@ -1,39 +1,36 @@
 import React, { Component } from 'react';
 import { NavBar } from '../component/AppBar';
-// import default_image from '../upload/images/default.png';
+// import default_image from '../img/default.png';
 import axios from 'axios';
 import './Profile.css';
 
-const images = require.context('../upload/images', true);
+// const images = require.context('../upload/images', true);
 
 class Profile extends Component{
     constructor() {
         super();
+
         this.state = {
             global_count: 0,
             personal_count: 0,
-            username: 'default user',
-            image: images('./default.png')
+            username: 'default user'
         }
 
         axios.get('/api/profile').then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             if(res.data){
                 this.setState({
                     global_count: res.data.global_count,
                     personal_count: res.data.personal_count,
                     username: res.data.username,
-                    image: images('./' + res.data.imgname)
                 })
             }
             else{
-                alert('sorry, backend server seems to have some errors')
+                alert('sorry, backend server seems to have some errors 1')
             }
-        }).then(() => {
-            
         }).catch(err => {
-            console.log(err)
-            alert('sorry, backend server seems to have some errors')
+            // console.log(err)
+            alert('sorry, backend server seems to have some errors 2')
         })
     }
     
@@ -43,7 +40,7 @@ class Profile extends Component{
             <NavBar/>
             <div id="Profile_container">
                 <div id="Profile_image_container">
-                    <img id="Profile_image" src={this.state.image} alt="ERROR" />
+                    <img id="Profile_image" src={'/api/profileImage'} alt="ERROR" />
                 </div>
                 <div id="Profile_content_container">
                     <label id="Profile_welcome_text">Welcome, {this.state.username}!!</label>

@@ -21,8 +21,16 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
 #upload files
-frontend/src/upload/images/*
+api/upload/*
+!api/upload/default.png
 
 node_modules
 node_modules/*
 api/tools/*.json
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+.ebignore

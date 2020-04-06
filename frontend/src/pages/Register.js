@@ -19,7 +19,6 @@ class Home extends Component{
             password: "",
             password_confirm: "",
             isRegistered: false,
-            isUploaded: false,
             file: null,
             filename: "",
             fileSelected: false
@@ -69,7 +68,7 @@ class Home extends Component{
             password: this.state.password}
         ).then(res => {
             if(res.data){
-                console.log(res.data);
+                // console.log(res.data);
                 this.setState( {isRegistered: res.data.isRegistered} );
 
                 if(this.state.isRegistered){
@@ -107,8 +106,7 @@ class Home extends Component{
                     }
                 }).then(res => {
                     if(res.data){
-                        console.log(res.data);
-                        this.setState({isUploaded: res.data.success})
+                        // console.log(res.data);
         
                         if(res.data.status === "no_image_uploaded"){
                             alert("where is your image? QQ ");
@@ -124,12 +122,12 @@ class Home extends Component{
                         alert("sorry, some errors occur when posting data");
                     }
                 }).catch(err => {
-                    console.log(err)
+                    // console.log(err)
                     alert("sorry, some errors occur when posting data");
                 })
             }
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
             alert("sorry, some errors occur when posting data");
         })
 	}
