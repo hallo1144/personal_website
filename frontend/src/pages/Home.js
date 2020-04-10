@@ -6,7 +6,6 @@ import './Home.css';
 class Home extends Component{
     constructor(){
         super();
-
         fetch('/api');
     }
 
