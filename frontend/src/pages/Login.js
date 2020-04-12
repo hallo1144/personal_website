@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavBar } from '../component/AppBar';
+import NavBar from '../component/AppBar';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import './Login.css';
 
-class Home extends Component{
+class Login extends Component{
     constructor(){
         super()
         this.state = {
@@ -16,7 +16,7 @@ class Home extends Component{
             isLoggedin: false
         }
 
-        fetch('/api');
+        axios.get('/api')
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -83,7 +83,7 @@ class Home extends Component{
         }
         return (
         <div>
-            <NavBar/>
+            <NavBar isloggedin={this.state.isloggedin} />
             <div id="Login_form_container">
                 <form onSubmit={this.handleSubmit}>
                     <div id="Login_row">
@@ -115,4 +115,4 @@ class Home extends Component{
     }
 }
 
-export default Home;
+export default Login;

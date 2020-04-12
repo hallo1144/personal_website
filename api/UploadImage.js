@@ -6,7 +6,10 @@ const shortid = require('shortid');
 
 module.exports = async function(req, res){
     if(req.session.username === undefined){
-        return res.status(402).send('please login first.');
+        return res.send({
+            success: false,
+            status: 'not_logged_in'
+        });
     }
     
     try{
@@ -20,7 +23,9 @@ module.exports = async function(req, res){
         }
     }
     catch(error){
-        console.log(error)
+        console.log('at UploadImage.js: 1')
+        console.log(error);
+        console.log('================================================');
         return res.send({
             success: false,
             status: 'server_err'
@@ -60,7 +65,9 @@ module.exports = async function(req, res){
 
     file.mv('api/upload/' + filename, async err => {
         if(err){
-            console.log(err)
+            console.log('at UploadImage.js: 2')
+            console.log(error);
+            console.log('================================================');
             return res.send({
                 success: false,
                 status: 'server_err'

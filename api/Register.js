@@ -56,7 +56,9 @@ module.exports = function(req, res){
             await mysql(queryString, params);
         }
         catch(error){
+            console.log('at Register.js: 1')
             console.log(error);
+            console.log('================================================');
             return res.send({
                 isRegistered  : false,
                 status      : "server_err"
@@ -70,7 +72,7 @@ module.exports = function(req, res){
             req.session.isCounted = true;
             req.session.username = username;
             req.session.selfCounter = 1;
-            req.session.imgpath = 'default.png'
+            req.session.imgname = 'default.png'
 
             res.send({
                 isRegistered  : true,
@@ -78,7 +80,9 @@ module.exports = function(req, res){
             });
         }
         catch(error){
+            console.log('at Register.js: 2')
             console.log(error);
+            console.log('================================================');
             queryString = 'delete from web_user where username = ? and password = ?';
             await mysql(queryString, params);
 
@@ -88,7 +92,9 @@ module.exports = function(req, res){
             });
         }
     }).catch( error => {
+        console.log('at Register.js: 3')
         console.log(error);
+        console.log('================================================');
         res.send({
             isRegistered  : false,
             status      : "server_err"

@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import image from '../img/pikachu.png';
-import { NavBar } from '../component/AppBar';
+import NavBar from '../component/AppBar';
+import axios from 'axios';
 import './Home.css';
 
 class Home extends Component{
     constructor(){
         super();
-        fetch('/api');
+        
+        this.state = {isloggedin: false};
+        axios.get('/api').then(res => {
+            console.log(res)
+            this.setState({isloggedin: res.data.isloggedin});
+        }).catch(err => {
+            alert('sorry, backend server seems to have some errors');
+            console.log(err);
+        })
     }
 
     render(){
         return (
         <div>
-            <NavBar/>
+            <NavBar isloggedin={this.state.isloggedin} />
             <div id="Home_container">
                 <div id="Home_image_column">
                     <div id="Home_image"><img src={image} alt="leftImage" width="250px" height="250px" /></div>

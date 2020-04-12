@@ -33,8 +33,6 @@ module.exports = function(req, res){
     mysql(queryString, params).then(async obj => {
         if(obj.length === 1){
             try{
-                console.log(obj)
-
                 var regen = util.promisify(req.session.regenerate).bind(req.session);
                 await regen();
                 Counter.increaseGlobalCount();
@@ -43,11 +41,10 @@ module.exports = function(req, res){
                 req.session.selfCounter = obj[0].visit_time + 1;
                 req.session.imgname = obj[0].picture_name
                 params = [req.session.selfCounter, username, password]
-                mysql("update web_user set visit_time = ? where username = ? and password = ?", params).catch(error => {
-                    console.log(error)
-                });
+                await mysql("update web_user set visit_time = ? where username = ? and password = ?", params)
             }
             catch(error){
+                console.log('at Login.js: 1')
                 console.log(error);
             }
             finally{
@@ -73,7 +70,9 @@ module.exports = function(req, res){
             });
         }
     }).catch(error => {
+        console.log('at Login.js: 2')
         console.log(error);
+        console.log('================================================');
         res.send({
             isLoggedin  : false,
             status      : "server_err"

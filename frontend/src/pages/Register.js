@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavBar } from '../component/AppBar';
+import NavBar from '../component/AppBar';
 import { Redirect } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import axios from 'axios';
@@ -10,7 +10,7 @@ import './Register.css';
 
 // import { Link } from 'react-router-dom';
 
-class Home extends Component{
+class Register extends Component{
     constructor(){
         super();
         
@@ -21,10 +21,18 @@ class Home extends Component{
             isRegistered: false,
             file: null,
             filename: "",
-            fileSelected: false
+            fileSelected: false,
+            isloggedin: false
         };
+        
+        axios.get('/api').then(res => {
+            console.log(res)
+            this.setState({isloggedin: res.data.isloggedin});
+        }).catch(err => {
+            alert('sorry, backend server seems to have some errors');
+            console.log(err);
+        })
 
-        fetch('/api');
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
@@ -139,7 +147,7 @@ class Home extends Component{
 
         return (
         <div>
-            <NavBar/>
+            <NavBar isloggedin={this.state.isloggedin} />
             <div id="Register_root_container">
                 <div id="Register_form_container">
                     <form onSubmit={this.handleSubmit}>
@@ -191,12 +199,4 @@ class Home extends Component{
     }
 }
 
-export default Home;
-
-// <div>
-//     <Button id="Register_file_upload_button" variant="contained" component="label">
-//         upload image
-//         <input type="file" style={{display: "none"}} onChange={this.handleFileChange} accept="image/*" />
-//     </Button>
-//     <label id="Register_file_name">{this.state.filename}</label>
-// </div>
+export default Register;
