@@ -3,21 +3,25 @@ var path = require('path');
 var LoginHandler = require("./Login");
 var LogoutHandler = require("./Logout");
 var RegisterHandler = require("./Register");
-var ImageHandler = require("./UploadImage");
+var UploadImageHandler = require("./UploadImage");
 var RootHandler = require("./Root");
 var ProfileHandler = require("./Profile");
 var MessageHandler = require("./Message");
 var SendMessageHandler = require("./SendMessage");
+var DeleteMessageHandler = require("./DeleteMessage");
+var ImageHandler = require("./Image");
 var router = express.Router();
 
 router.get("/", RootHandler);
 router.post("/login", LoginHandler);
 router.get("/logout", LogoutHandler);
 router.post("/register", RegisterHandler);
-router.post("/upload", ImageHandler);
+router.post("/upload", UploadImageHandler);
 router.get("/profile", ProfileHandler);
 router.get("/message", MessageHandler);
 router.post("/sendMessage", SendMessageHandler);
+router.post("/deleteMessage", DeleteMessageHandler);
+router.get("/image/:filename", ImageHandler);
 
 router.get("/profileImage", function(req, res){
     try{

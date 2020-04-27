@@ -5,7 +5,10 @@ import './Message.css';
 import { TextField, Paper } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ScrollArea from 'react-scrollbar';
+
+
 
 class Message extends Component{
     constructor(){
@@ -17,7 +20,7 @@ class Message extends Component{
         };
 
         axios.get('/api').then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({isloggedin: res.data.isloggedin});
 
             axios.get('/api/message').then(res => {
@@ -26,6 +29,7 @@ class Message extends Component{
                     window.location = "/";
                 }
                 this.setState({message: res.data.message});
+                console.log(res.data.message)
             }).catch(err => {
                 alert('sorry, backend server meets some error.');
                 // console.log(err)
@@ -33,7 +37,7 @@ class Message extends Component{
             })
         }).catch(err => {
             alert('sorry, backend server seems to have some errors');
-            console.log(err);
+            // console.log(err);
         })
         
         this.sendMessage = this.sendMessage.bind(this);
@@ -77,6 +81,30 @@ class Message extends Component{
 		});
 	}
 
+    deleteMessage = param => event => {
+        var f = window.confirm('Are you sure you want to remove this message permanently?');
+        if(!f){
+            return;
+        }
+
+        axios.post('/api/deleteMessage', {id: param}).then(res => {
+            if(!res.data){
+                alert('sorry, some errors occur when posting data');
+                return;
+            }
+            else if(!res.data.success){
+                alert('fail deleting message :(');
+            }
+            else{
+                alert('delete successfully!');
+                window.location.pathname = '/message';
+            }
+        }).catch(err => {
+            alert('sorry, backend server seems to have some errors');
+            console.log(err);
+        })
+    }
+
     render(){
         let messages = [];
 
@@ -88,11 +116,27 @@ class Message extends Component{
                 if(j !== message.length - 1)
                     messagehtml.push(<br />);
             }
-            messages.push(<Paper id="Message_messages_column">
-                <label id="Messages_message_username">{this.state.message[i].username + ' says:'}</label>
-                <br />
-                {messagehtml}
-            </Paper>)
+            messages.push(
+                <Paper id="Message_messages_column">
+                    <div id="Message_messages_column_left_container">
+                        <div id="Message_messages_column_image_container">
+                            <img id="Message_messages_column_image" src={'/api/image/' + this.state.message[i].imgpath} alt="ERROR" />
+                        </div>
+                        <div id="Message_messages_column_title_container">
+                            <label id="Messages_message_username">{this.state.message[i].username + ' says:'}</label>
+                            <br />
+                            {messagehtml}
+                        </div>
+                    </div>
+                    {this.state.message[i].own ? 
+                        <div id="Message_messages_column_title_delete_button">
+                            <Fab color="primary" id={i} aria-label="edit" onClick={this.deleteMessage(i)}>
+                                <DeleteIcon />
+                            </Fab>
+                        </div>
+                        : <div></div>
+                    }
+                </Paper>)
         }
         
         const myScrollbar = {

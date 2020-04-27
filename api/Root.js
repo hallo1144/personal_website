@@ -14,7 +14,6 @@ module.exports = function(req, res){
         req.session.selfCounter = 1;
         req.session.imgname = 'default.png'
         console.log('root set session')
-        console.log(req.session)
         console.log('================================================');
     }
     res.send({

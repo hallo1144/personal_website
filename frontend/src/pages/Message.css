@@ -32,6 +32,34 @@ html {
     margin-left: 5px;
     margin-right: 5px;
     width: wrap-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#Message_messages_column_left_container{
+    display: flex;
+    align-items: center;
+}
+
+#Message_messages_column_image_container{
+    width: 80px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#Message_messages_column_image{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+#Message_messages_column_title_delete_button{
+    margin-right: 5px;
 }
 
 #Messages_message_username{

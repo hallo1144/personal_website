@@ -1,24 +1,22 @@
 var mysql = require("./tools/DbInstance");
 
 module.exports = async function(req, res){
+    imgpath = {}
     ret_message = {}
     try{
         obj = await mysql("select * from messages");
         for(i = 0; i < obj.length; i++){
-            if(obj[i].username === req.session.username){
-                ret_message[obj[i].id] = {
-                    username: obj[i].username,
-                    message: obj[i].message,
-                    own: true
-                };
+            if(imgpath[obj[i].username] === undefined){
+                obj2 = await mysql('select picture_name from web_user where username = ?;', [obj[i].username]);
+                imgpath[obj[i].username] = obj2[0].picture_name;
             }
-            else{
-                ret_message[obj[i].id] = {
-                    username: obj[i].username,
-                    message: obj[i].message,
-                    own: false
-                };
-            }
+
+            ret_message[obj[i].id] = {
+                username: obj[i].username,
+                message: obj[i].message,
+                own: obj[i].username === req.session.username,
+                imgpath: imgpath[obj[i].username]
+            };
         }
 
         return res.send({

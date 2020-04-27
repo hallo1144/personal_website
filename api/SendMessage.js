@@ -17,7 +17,7 @@ module.exports = async function(req, res){
     }
     
     message = message.replace('\r', '');
-    if (/[\x00-\x09\x0B-\x1F\x80-\xFF]/.test(data)){
+    if (/[\x00-\x09\x0B-\x1F\x80-\xFF]/.test(message)){
         return res.send({
             success: false,
             status: 'unprintable_char'
@@ -34,6 +34,9 @@ module.exports = async function(req, res){
         });
     }
     catch(err){
+        console.log('at SendMessage.js:')
+        console.log(err);
+        console.log('================================================');
         return res.send({
             success: false,
             status: 'server_err'
