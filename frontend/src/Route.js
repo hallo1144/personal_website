@@ -7,27 +7,31 @@ import Logout from "./pages/Logout";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Message from "./pages/Message";
+import Null from "./pages/Null";
 
-const Home_page = () =>{
+const Home_page = () => {
     return <Home/>;
 };
-const Easter_egg = () =>{
+const Easter_egg = () => {
     return <EasterEgg />;
 };
-const Login_page = () =>{
+const Login_page = () => {
     return <Login/>;
 };
-const Register_page = () =>{
+const Register_page = () => {
     return <Register/>
 };
-const Profile_page = () =>{
+const Profile_page = () => {
     return <Profile/>;
 };
-const Message_page = () =>{
+const Message_page = () => {
     return <Message/>;
 };
-const Logout_page = () =>{
+const Logout_page = () => {
     return <Logout/>;
 };
+const Null_page = () => {
+    return <Null />;
+};
 
-export { Home_page, Easter_egg, Login_page, Register_page, Profile_page, Message_page, Logout_page };
+export { Home_page, Easter_egg, Login_page, Register_page, Profile_page, Message_page, Logout_page, Null_page };
