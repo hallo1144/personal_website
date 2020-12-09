@@ -26,7 +26,6 @@ api/upload/*
 
 node_modules
 node_modules/*
-api/tools/*.json
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
@@ -34,3 +33,4 @@ api/tools/*.json
 !.elasticbeanstalk/*.global.yml
 
 .ebignore
+.env

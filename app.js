@@ -7,11 +7,10 @@ var logger = require('morgan');
 // var Counter = require('./api/tools/Counter');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
-var db_options = require('./api/tools/DbOptions.json');
-var session_options = require('./api/tools/SessionOptions.json');
 var fileupload = require("express-fileupload");
 
 var APIRouter = require('./api/Route');
+require('dotenv').config();
 
 var app = express();
 
@@ -19,8 +18,29 @@ var app = express();
 app.use(fileupload());
 
 // setup session
-var sessionStore = new MySQLStore(db_options);
-session_options.store = sessionStore;
+var db_options = {
+    "host"     : process.env.MYSQL_HOST || "127.0.0.1",
+    "port"     : process.env.MYSQL_PORT || "3306",
+    "user"     : process.env.MYSQL_USER || "username",
+    "password" : process.env.MYSQL_PASSWORD || "password",
+    "database" : process.env.MYSQL_DATABASE || "database",
+    createDatabaseTable: true,
+}
+
+var session_store = new MySQLStore(db_options)
+
+session_options = {
+    key: "PHPSESSID",
+    secret: process.env.SESSION_SECRET || 'amhrfds4',
+    resave: false,
+    saveUninitialized: true,
+    store: session_store,
+    cookie: {
+		httpOnly: true,
+        maxAge: 3600000
+    }
+}
+
 app.use(session(session_options));
 
 // view engine setup
